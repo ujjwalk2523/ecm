@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SRM E-Yantra Lab Inventory</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="logo">SRM <span>E-Yantra</span></div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories">Categories</a>
+        <a href="cart.html" class="cart">Cart <span id="cart-count">0</span></a>
+        <a href="login.html" class="login">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+ 
+
+  <!-- HERO / SLIDER -->
+  <section class="hero">
+    <div class="slider container" id="slider">
+      <!-- Slide 1: Video -->
+      <div class="slide active" data-index="0">
+        <video class="media" autoplay muted loop playsinline>
+          <source src="videos/slide1.mp4" type="video/mp4" />
+          <!-- fallback poster if video not supported -->
+        </video>
+        <div class="overlay">
+          <h1>Affordable equipment rentals<br><span>for labs & projects</span></h1>
+          <p>Save resources — rent lab gear from your institute inventory.</p>
+          <a class="btn" href="#">Rent Now</a>
+        </div>
+      </div>
+
+      <!-- Slide 2: Image -->
+        <div class="slide active" data-index="0">
+        <video class="media" autoplay muted loop playsinline>
+          <source src="videos/slide2.mp4" type="video/mp4" />
+          <!-- fallback poster if video not supported -->
+        </video>
+        <div class="overlay">
+          <h1>High-quality instruments<br><span>on flexible terms</span></h1>
+          <p>Reserve equipment for days, weeks or the whole semester.</p>
+          <a class="btn" href="#">Browse</a>
+        </div>
+      </div>
+
+      <!-- Slide 3: Image -->
+       <div class="slide active" data-index="0">
+        <video class="media" autoplay muted loop playsinline>
+          <source src="videos/slide3.mp4" type="video/mp4" />
+          <!-- fallback poster if video not supported -->
+        </video>
+        <div class="overlay">
+          <h1>Quick checkout<br><span>and delivery inside campus</span></h1>
+          <p>Book, collect or request delivery — a few clicks and you're done.</p>
+          <a class="btn" href="#">Explore</a>
+        </div>
+      </div>
+
+      <!-- Arrows -->
+      <button class="arrow left" id="prev" aria-label="Previous">&#10094;</button>
+      <button class="arrow right" id="next" aria-label="Next">&#10095;</button>
+
+      <!-- Dots -->
+      <div class="dots" id="dots"></div>
+    </div>
+  </section>
+
+  <!-- CATEGORY CARDS -->
+  <section class="categories container">
+    <h2 class="section-title">Rent Equipment & Tools</h2>
+<div class="cards">
+  <div class="card" data-category="Electronics"><img src="images/1.jpg" alt=""><span>Electronics</span></div>
+  <div class="card" data-category="Instruments"><img src="images/2.jpg" alt=""><span>Instruments</span></div>
+  <div class="card" data-category="Robotics"><img src="images/3.jpg" alt=""><span>Robotics</span></div>
+  <div class="card" data-category="Power Tools"><img src="images/4.jpg" alt=""><span>Power Tools</span></div>
+  <div class="card" data-category="Testbeds"><img src="images/5.jpg" alt=""><span>Testbeds</span></div>
+  <div class="card" data-category="Accessories"><img src="images/6.jpg" alt=""><span>Accessories</span></div>
+</div>
+
+  </section>
+
+<!-- PRODUCT DISPLAY SECTION -->
+<section id="product-list" class="container" style="display:none;">
+  <h2 id="product-title"></h2>
+  <div id="product-container" class="product-grid"></div>
+</section>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+  <!-- 3 FEATURE CARDS -->
+  <section id="categories" class="features container">
+    <div class="feature">
+      <h3>Wide Range</h3>
+      <p>Electronics, robotics, instruments & more.</p>
+    </div>
+    <div class="feature">
+      <h3>Flexible Terms</h3>
+      <p>Short or long rentals to suit your timeline.</p>
+    </div>
+    <div class="feature">
+      <h3>Campus Delivery</h3>
+      <p>Collect from lab or request delivery across campus.</p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="products container">
+    <h2 class="section-title">Available Equipment</h2>
+    <div id="products-grid" class="grid"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div>© <strong>SRM E-Yantra</strong> Lab Inventory</div>
+     
+    </div>
+  </footer>
+
+  <!-- PRODUCTS DATA & SCRIPTS -->
+  <script src="js/products.js"></script>
+
+
+<script>
+  const categoryCards = document.querySelectorAll(".card");
+  const productSection = document.getElementById("product-list");
+  const productTitle = document.getElementById("product-title");
+  const productContainer = document.getElementById("product-container");
+
+  categoryCards.forEach(card => {
+    card.addEventListener("click", () => {
+      const selectedCategory = card.dataset.category;
+
+      // Show Section Title
+      productTitle.textContent = selectedCategory + " Equipment";
+
+      // Filter Products
+      const filteredProducts = PRODUCTS.filter(item => item.category === selectedCategory);
+
+      // Display Products
+      productContainer.innerHTML = filteredProducts.map(item => `
+        <div class="product-card">
+          <img src="${item.img}" alt="${item.title}">
+          <h3>${item.title}</h3>
+          <p>${item.short}</p>
+          <p><strong>₹${item.price}/day</strong></p>
+        </div>
+      `).join("");
+
+      // Show Product Section
+      productSection.style.display = "block";
+
+      // Scroll to products
+      productSection.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+</script>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
